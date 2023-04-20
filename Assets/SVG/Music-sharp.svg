@@ -1,0 +1,18 @@
+<svg width="200" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <script id="dashlane_webauthn" name="forward_webauthn_ready"/>
+ <script id="dashlane_webauthn_vendors"/>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(-73.188 -101.99)">
+  <g>
+   <path d="m79.903 145.91v-17.004l7.0464-1.9953v16.917zm13.874-4.1135-4.8444 1.4242v-16.917l4.8444-1.388v-7.027l-4.8444 1.388v-17.285h-1.9836v17.809l-7.0464 2.0784v-16.808h-1.8708v17.447l-4.8444 1.3917v7.0414l4.8444-1.388v16.884l-4.8444 1.3844v7.0125l4.8444-1.388v17.187h1.8708v-17.802l7.0464-1.9881v16.721h1.9836v-17.35l4.8444-1.3917z"/>
+   <g transform="translate(213.58 102.33)"></g>
+  </g>
+ </g>
+</svg>

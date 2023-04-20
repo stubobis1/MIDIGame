@@ -1,0 +1,13 @@
+
+MIDI Input system 
+Minis
+https://github.com/keijiro/Minis
+Minis uses RtMidi as a MIDI device backend. RtMidi is distributed under an MIT
+style license. See the following repository for details.
+https://github.com/keijiro/jp.keijiro.rtmidi
+The other components in that repository are put under the public domain.
+
+
+music staff.svg
+https://commons.wikimedia.org/wiki/File:Music-staff.svg
+Ummagumma, Public domain, via Wikimedia Commons

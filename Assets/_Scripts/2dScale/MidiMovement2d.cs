@@ -18,26 +18,6 @@ namespace ScaleGame2d
         public GameObject Flat;
         public GameObject OutOfStaffLine;
 
-        // in constructor initialize
-        public MidiMovement2d()
-        {
-            NoteOnAction = (MidiNoteControl note, float velocity) =>
-            {
-                OnNotePressed(note, velocity);
-            };
-            NoteOffAction = (MidiNoteControl note) =>
-            {
-                OnNoteReleased(note);
-            };
-
-
-        }
-
-        ~MidiMovement2d()
-        {
-            UnsubscribeNoteFuncs();
-        }
-
         private void subscibeNoteFuncs()
         {
             MidiController.NoteOnActions += NoteOnAction;
@@ -52,11 +32,26 @@ namespace ScaleGame2d
 
         #endregion
 
+        private void Awake()
+        {
+            NoteOnAction = (MidiNoteControl note, float velocity) =>
+            {
+                OnNotePressed(note, velocity);
+            };
+            NoteOffAction = (MidiNoteControl note) =>
+            {
+                OnNoteReleased(note);
+            };
+        }
         // Start is called before the first frame update
         void Start()
         {
             subscibeNoteFuncs();
+        }
 
+        private void OnDestroy()
+        {
+            UnsubscribeNoteFuncs();
         }
 
         // Update is called once per frame
@@ -65,13 +60,20 @@ namespace ScaleGame2d
 
         }
 
+
+
         void OnNotePressed(MidiNoteControl note, float velocity)
         {
             //        if (note.shortDisplayName.Length > 0) { }
             var name = note.shortDisplayName;
             var posName = name.Replace("#", "");
+            
             if (name.Contains('#'))
             {
+                if (Sharp == null ||  Sharp.IsDestroyed())
+                {
+                    Debug.LogWarning("wtf sahrp");
+                }
                 Sharp.SetActive(true);
             }
             else

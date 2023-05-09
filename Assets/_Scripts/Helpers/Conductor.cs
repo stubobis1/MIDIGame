@@ -1,8 +1,5 @@
-using Minis;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
@@ -24,6 +21,21 @@ public class Conductor : MonoBehaviour
     //Current song position, in beats
     public float songPositionInBeats;
 
+
+    public static Conductor Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("More than one Conductor!");
+        }
+
+        Instance = this;
+
+    }
+
+
     Dictionary<float, List<Action<int>>> beatActions = new Dictionary<float, List<Action<int>>>();
     Dictionary<float, int> lastTriggeredBeats = new();
 
@@ -34,7 +46,7 @@ public class Conductor : MonoBehaviour
     /// <param name="action">delagate</param>
     public void AddBeatAction(float FrequencyPerBeat, Action<int> action)
     {
-        
+
         if (!beatActions.ContainsKey(FrequencyPerBeat))
         {
             beatActions[FrequencyPerBeat] = new List<Action<int>>();
@@ -61,15 +73,7 @@ public class Conductor : MonoBehaviour
     //an AudioSource attached to this GameObject that will play the music.
     public AudioSource musicSource;
 
-    public static Conductor Instance { get; private set; }
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
 
 
     void Start()
@@ -100,7 +104,7 @@ public class Conductor : MonoBehaviour
         {
             checkForBeatActions(interval);
         }
-        
+
     }
 
     private void checkForBeatActions(float interval)

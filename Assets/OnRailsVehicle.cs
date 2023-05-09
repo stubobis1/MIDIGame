@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-namespace onRails
+namespace OnRails
 {
-    public class onRailsPlayer : MonoBehaviour
+    public class OnRailsVehicle : MonoBehaviour
     {
         public GameObject waypoints;
         public float Speed = 0.2f;
         public Rigidbody body;
-
+        public bool debug = false;
 
         private List<Transform> targets;
         private int targetIndex;
@@ -53,7 +53,10 @@ namespace onRails
             {
                 //targetIndex++;
                 targetIndex = targets.IndexOf(other.transform) + 1;
-                print("targetIndex: " + targetIndex);
+                if (debug)
+                {
+                    print("targetIndex: " + targetIndex);
+                }
                 changedTargets= true;
 
                 if (targetIndex >= targets.Count)

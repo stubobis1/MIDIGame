@@ -22,66 +22,67 @@ public static class MusicHelper
         return noteName.Replace("#", "");
     }
 
+    #region setup, used in midicontroller
     /// <summary>
-    /// Run this on start()
+    /// Run this on start() -- 
     /// </summary>
-    public static void SetupActions()
-    {
-        InputSystem.onDeviceChange += (device, change) =>
-        {
-            if (change != InputDeviceChange.Added) return;
+    //public static void SetupActions()
+    //{
+    //    InputSystem.onDeviceChange += (device, change) =>
+    //    {
+    //        if (change != InputDeviceChange.Added) return;
 
-            var midiDevice = device as Minis.MidiDevice;
-            if (midiDevice == null)
-            {
-                return;
-            }
-            else
-            {
-                CurrentMidiDevice = midiDevice;
-            }
+    //        var midiDevice = device as Minis.MidiDevice;
+    //        if (midiDevice == null)
+    //        {
+    //            return;
+    //        }
+    //        else
+    //        {
+    //            CurrentMidiDevice = midiDevice;
+    //        }
 
-            #region debug print actions
-            if (debugOnPress)
-            {
-                midiDevice.onWillNoteOn += (note, velocity) =>
-                {
-                    // Note that you can't use note.velocity because the state
-                    // hasn't been updated yet (as this is "will" event). The note
-                    // object is only useful to specify the target note (note
-                    // number, channel number, device name, etc.) Use the velocity
-                    // argument as an input note velocity.
-                    Debug.Log(string.Format(
-                        "Note On #{0} ({1}) vel:{2:0.00} ch:{3} dev:'{4}'",
-                        note.noteNumber,
-                        note.shortDisplayName,
-                        velocity,
-                        (note.device as Minis.MidiDevice)?.channel,
-                        note.device.description.product
-                    ));
+    //        #region debug print actions
+    //        if (debugOnPress)
+    //        {
+    //            midiDevice.onWillNoteOn += (note, velocity) =>
+    //            {
+    //                // Note that you can't use note.velocity because the state
+    //                // hasn't been updated yet (as this is "will" event). The note
+    //                // object is only useful to specify the target note (note
+    //                // number, channel number, device name, etc.) Use the velocity
+    //                // argument as an input note velocity.
+    //                Debug.Log(string.Format(
+    //                    "Note On #{0} ({1}) vel:{2:0.00} ch:{3} dev:'{4}'",
+    //                    note.noteNumber,
+    //                    note.shortDisplayName,
+    //                    velocity,
+    //                    (note.device as Minis.MidiDevice)?.channel,
+    //                    note.device.description.product
+    //                ));
 
 
-                };
+    //            };
 
-                midiDevice.onWillNoteOff += (note) =>
-                {
-                    Debug.Log(string.Format(
-                        "Note Off #{0} ({1}) ch:{2} dev:'{3}'",
-                        note.noteNumber,
-                        note.shortDisplayName,
-                        (note.device as Minis.MidiDevice)?.channel,
-                        note.device.description.product
-                    ));
-                };
-            }
-            #endregion
+    //            midiDevice.onWillNoteOff += (note) =>
+    //            {
+    //                Debug.Log(string.Format(
+    //                    "Note Off #{0} ({1}) ch:{2} dev:'{3}'",
+    //                    note.noteNumber,
+    //                    note.shortDisplayName,
+    //                    (note.device as Minis.MidiDevice)?.channel,
+    //                    note.device.description.product
+    //                ));
+    //            };
+    //        }
+    //        #endregion
 
-            midiDevice.onWillNoteOn += NoteOnActions;
-            midiDevice.onWillNoteOff += NoteOffActions;
-            midiDevice.onWillControlChange += ControlChangeActions;
-        };
-    }
-
+    //        midiDevice.onWillNoteOn += NoteOnActions;
+    //        midiDevice.onWillNoteOff += NoteOffActions;
+    //        midiDevice.onWillControlChange += ControlChangeActions;
+    //    };
+    //}
+    #endregion
 
     public static T[] CopyAndReverseArray<T>(T[]  scale)
     {

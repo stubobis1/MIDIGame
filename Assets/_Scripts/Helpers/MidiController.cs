@@ -1,8 +1,8 @@
 using Minis;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Layouts;
 
 // NoteCallback.cs - This script shows how to define a callback to get notified
 // on MIDI note-on/off events.
@@ -12,19 +12,37 @@ sealed class MidiController : MonoBehaviour
     public static MidiController Instance;
 
 
-    public static Action<MidiNoteControl, float> NoteOnActions;
-    public static Action<MidiNoteControl> NoteOffActions;
-    public static Action<MidiValueControl, float> ControlChangeActions;
+    public static event Action<MidiNoteControl, float> NoteOnActions
+    {
+        // Action list lazy allocation
+        add => (_NoteOnActions = _NoteOnActions ??
+                new List<Action<MidiNoteControl, float>>()).Add(value);
+        remove => _NoteOnActions.Remove(value);
+    }
+    static List<Action<MidiNoteControl, float>> _NoteOnActions;
+
+
+    public static event Action<MidiNoteControl> NoteOffActions
+    {
+        // Action list lazy allocation
+        add => (_NoteOffActions = _NoteOffActions ??
+                new List<Action<MidiNoteControl>>()).Add(value);
+        remove => _NoteOffActions.Remove(value);
+    }
+    static List<Action<MidiNoteControl>> _NoteOffActions;
+
+    //public static Action<MidiValueControl, float> ControlChangeActions;
 
     public bool debug = true;
 
-
-    public MidiController()
+    private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null)
         {
-            Instance = this;
+            Debug.LogError("More than one MidiController!");
         }
+
+        Instance = this;
     }
     void Start()
     {
@@ -77,11 +95,9 @@ sealed class MidiController : MonoBehaviour
             }
             #endregion
 
-            
-
-            midiDevice.onWillNoteOn += NoteOnActions;
-            midiDevice.onWillNoteOff += NoteOffActions;
-            midiDevice.onWillControlChange += ControlChangeActions;
+            midiDevice.onWillNoteOn += (x,y) => _NoteOnActions.ForEach(z => z(x,y));
+            midiDevice.onWillNoteOff += (x) => _NoteOffActions.ForEach(z => z(x));
+            //midiDevice.onWillControlChange += ControlChangeActions;
         };
     }
 

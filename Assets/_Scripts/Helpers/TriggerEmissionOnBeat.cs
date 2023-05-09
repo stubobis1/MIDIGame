@@ -9,11 +9,22 @@ public class TriggerEmissionOnBeat : TriggerOnBeat
     ParticleSystem ParticleSystem;
     ParticleSystem.MainModule psMain;
 
+    public Color EvenBeatColor = Color.white;
+    public Color OddBeatColor = Color.white;
+    public Color HalfBeatColor = Color.white;
+
+    public int EmissionAmount;
+    public int HalfBeatEmissionAmount;
+
+    public float Interval = 1f;
 
     private void Awake()
     {
-        beatActions.Add(1f, x => onBeat(x));
-        beatActions.Add(2f, x => onHalfBeat(x));
+        beatActions.Add(Interval, x => onBeat(x));
+        if (HalfBeatEmissionAmount > 0)
+        {
+            beatActions.Add(Interval * 2, x => onHalfBeat(x));
+        }
     }
 
 
@@ -32,21 +43,24 @@ public class TriggerEmissionOnBeat : TriggerOnBeat
     {
         if (totalBeats % Conductor.Instance.songBeatsPerMeasure == 0 || totalBeats % Conductor.Instance.songBeatsPerMeasure == 2)
         {
-            psMain.startColor= Color.red;
-            ParticleSystem.Emit(100);
+            psMain.startColor = EvenBeatColor;
+            ParticleSystem.Emit(EmissionAmount);
         }
         else
         {
-            psMain.startColor= Color.blue;
-            ParticleSystem.Emit(100);
+            psMain.startColor = OddBeatColor;
+            ParticleSystem.Emit(EmissionAmount);
         }
         
     }
     private void onHalfBeat(int totalBeats)
     {
-        psMain.startColor = Color.white;
+        if (totalBeats % 2 == 0)
+        {
+            psMain.startColor = HalfBeatColor;
+        }
 
-        ParticleSystem.Emit(2);
+        ParticleSystem.Emit(HalfBeatEmissionAmount);
     }
 
     // Update is called once per frame

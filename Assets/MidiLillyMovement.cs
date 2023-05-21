@@ -19,8 +19,7 @@ namespace LillypadGame
 
         public bool debug = false;
 
-
-        private void subscibeNoteFuncs()
+        private void SubscibeNoteFuncs()
         {
             MidiController.NoteOnActions += NoteOnAction;
             MidiController.NoteOffActions += NoteOffAction;
@@ -52,13 +51,13 @@ namespace LillypadGame
                 OnNoteReleased(note);
             };
 
-            subscibeNoteFuncs();
+            SubscibeNoteFuncs();
             if (debug)
             {
                 Debug.LogWarning("midi lily start");
             }
 
-            }
+        }
 
         private void OnDestroy()
         {
@@ -75,7 +74,7 @@ namespace LillypadGame
         {
             if (debug)
             {
-                Debug.LogWarning("midi lily update");
+                //Debug.LogWarning("midi lily update");
             }
             
             CharAnimator.SetBool("Grounded", isAnimateGrounded);
@@ -111,10 +110,10 @@ namespace LillypadGame
             }
             isAnimateGrounded = true;
         }
-        Vector3 nextPos;
+        Vector3 nextTransform;
         private Vector3 GetJumpPosition()
         {
-            return nextPos;
+            return nextTransform;
             //throw new NotImplementedException();
         }
 
@@ -135,7 +134,7 @@ namespace LillypadGame
                 {
                     Debug.LogWarning($"midi lily Hit correct note: {note.shortDisplayName}");
                 }
-                nextPos = lillyPad.transform.position;
+                nextTransform = lillyPad.transform.position;
                 StartJump();
                 currentScaleIndex++;
             }
@@ -148,10 +147,8 @@ namespace LillypadGame
             }
             //var lillyPadLogic = lillyPad.GetComponent<LillyPadLogic>();
 
-
             if (notesDown == 0)
             {
-
                 isAnimateGrounded = false;
             }
             notesDown++;

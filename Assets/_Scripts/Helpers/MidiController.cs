@@ -43,6 +43,15 @@ sealed class MidiController : MonoBehaviour
         }
 
         Instance = this;
+
+        _NoteOffActions = new();
+        _NoteOnActions = new();
+    }
+
+    private void OnDestroy()
+    {
+        CurrentMidiDevice.onWillNoteOn -= doOnActions;
+        CurrentMidiDevice.onWillNoteOff -= doOffActions;
     }
     void Start()
     {
@@ -95,10 +104,20 @@ sealed class MidiController : MonoBehaviour
             }
             #endregion
 
-            midiDevice.onWillNoteOn += (x,y) => _NoteOnActions.ForEach(z => z(x,y));
-            midiDevice.onWillNoteOff += (x) => _NoteOffActions.ForEach(z => z(x));
+            midiDevice.onWillNoteOn += doOnActions;
+            midiDevice.onWillNoteOff += doOffActions;
             //midiDevice.onWillControlChange += ControlChangeActions;
         };
+    }
+
+
+    void doOnActions(MidiNoteControl note, float velo)
+    {
+        _NoteOnActions.ForEach(z => z(note, velo));
+    }
+    private void doOffActions(MidiNoteControl obj)
+    {
+        _NoteOffActions.ForEach(z => z(obj));
     }
 
 }

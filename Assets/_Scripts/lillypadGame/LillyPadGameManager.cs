@@ -10,6 +10,7 @@ namespace LillypadGame
 
         public Vector3 scrollDirection;
         public Vector3 offsetBetweenNotes;
+        public Vector3 offsetBetweenNoteTargets;
 
         public static LillyPadGameManager Instance;
 
@@ -30,7 +31,41 @@ namespace LillypadGame
             if (currentScale.Length == 0)
             {
                 //currentScale = MusicHelper.CopyAndReverseArray(MusicHelper.dSharpMinorPentatonic);
-                currentScale = MusicHelper.CopyAndReverseArray(MusicHelper.cMajor);
+                //currentScale = MusicHelper.CopyAndReverseArray(MusicHelper.cMajor);
+                currentScale= new string[] { 
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                    "C4",
+                };
             }
             GenerateNotesForScale(currentScale);
         }
@@ -44,12 +79,17 @@ namespace LillypadGame
 
                 var obj = Instantiate(LilyPadPrefab);
                 obj.SetActive(true);
-                //TODO: this and speed should be replaced with a conductor
+                
+                
+
                 obj.transform.position = Player.transform.position + (offsetBetweenNotes * (i + 1));
                 var lillyPadLogic = obj.GetComponent<LillyPadLogic>();
+                lillyPadLogic.targetBeat = (i + 4);
+                lillyPadLogic.targetPos = Player.transform.position + (offsetBetweenNoteTargets * (i + 1));
                 LilyPads.Add(lillyPadLogic);
                 lillyPadLogic.AddNote(noteName);
-                lillyPadLogic.scrollSpeed = (1f / Conductor.Instance.secPerBeat) * offsetBetweenNotes.x * -this.scrollDirection;
+
+                //lillyPadLogic.scrollSpeed = (1f / Conductor.Instance.secPerBeat) * offsetBetweenNotes.x * -this.scrollDirection;
                 //lillyPadLogic.scrollSpeed = this.scrollSpeed;
             }
         }

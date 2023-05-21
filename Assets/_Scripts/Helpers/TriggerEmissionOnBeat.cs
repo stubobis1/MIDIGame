@@ -16,9 +16,9 @@ public class TriggerEmissionOnBeat : TriggerOnBeat
     public int EmissionAmount;
     public int HalfBeatEmissionAmount;
 
-    public float Interval = 1f;
+    new public float Interval = 1f;
 
-    private void Awake()
+    protected override void Awake()
     {
         beatActions.Add(Interval, x => onBeat(x));
         if (HalfBeatEmissionAmount > 0)
@@ -29,7 +29,7 @@ public class TriggerEmissionOnBeat : TriggerOnBeat
 
 
     // Start is called before the first frame update
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         if (ParticleSystem == null)

@@ -77,7 +77,7 @@ public class OnRailsMidiShooter : MidiGameObject
         base.OnDestroy();
         if (debug)
         {
-            print("OnRailsMidiShooter Destoryed WTFF?!??");
+            //print("OnRailsMidiShooter Destoryed WTFF?!??"); // we good now, the bug was in how we handled delagates
         }
     }
 

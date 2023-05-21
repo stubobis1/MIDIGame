@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class TargetGame3dTarget : MonoBehaviour
 {
-    public bool IsAlive = true;
-    public string AnimationToPlayWhenDead;
+    //public string AnimationToPlayWhenDead; // nah
     public float TimeToLiveAfterHit = 0.4f;
     public bool debug = true;
+    public GameObject Explosion;
     private void Start()
     {
         OnRailsMidiShooter.Instance.targets.Add(this);
@@ -34,19 +34,19 @@ public class TargetGame3dTarget : MonoBehaviour
     {
         if (debug)
             print("GAMEOBJECT HIT");
-        IsAlive = false;
-        var beat = GetComponent<TriggerAnimationOnBeat>();
-        if (beat != null)
-        {
-            beat.enabled = false;
-            var ani = GetComponent<Animation>();
-            if (ani != null)
-            {
-                ani.Play(AnimationToPlayWhenDead);
+        //var beat = GetComponent<TriggerAnimationOnBeat>();
+        //if (beat != null)
+        //{
+        //    beat.enabled = false;
+        //    var ani = GetComponent<Animation>();
+        //    if (ani != null)
+        //    {
+        //        ani.Play(AnimationToPlayWhenDead);
                 
-            }
-        }
+        //    }
+        //}
         //Destroy(this, TimeToLiveAfterHit);
+        Instantiate(Explosion, this.transform.position, this.transform.rotation);
         Destroy(this.gameObject);
 
     }

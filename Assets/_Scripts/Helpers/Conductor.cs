@@ -12,14 +12,27 @@ public class Conductor : MonoBehaviour
 
     public int songBeatsPerMeasure = 4;
 
+    //an AudioSource attached to this GameObject that will play the music.
+    public AudioSource musicSource;
+
     //The number of seconds for each song beat
+    [DisplayWithoutEdit()]
     public float secPerBeat;
 
     //Current song position, in seconds
+    [DisplayWithoutEdit()]
     public float songPosition;
 
     //Current song position, in beats
+    [DisplayWithoutEdit()]
     public float songPositionInBeats;
+
+    [DisplayWithoutEdit()]
+    public float songBps;
+
+    [DisplayWithoutEdit()]
+    //How many seconds have passed since the song started
+    public float dspSongTime;
 
 
     public static Conductor Instance { get; private set; }
@@ -30,9 +43,14 @@ public class Conductor : MonoBehaviour
         {
             Debug.LogError("More than one Conductor!");
         }
-
         Instance = this;
 
+        //Load the AudioSource attached to the Conductor GameObject
+        musicSource = GetComponent<AudioSource>();
+
+        //Calculate the number of seconds in each beat
+        secPerBeat = 60f / songBpm;
+        songBps = songBpm * 60;
     }
 
 
@@ -67,24 +85,12 @@ public class Conductor : MonoBehaviour
         }
     }
 
-    //How many seconds have passed since the song started
-    public float dspSongTime;
-
-    //an AudioSource attached to this GameObject that will play the music.
-    public AudioSource musicSource;
 
 
 
 
     void Start()
     {
-
-        //Load the AudioSource attached to the Conductor GameObject
-        musicSource = GetComponent<AudioSource>();
-
-        //Calculate the number of seconds in each beat
-        secPerBeat = 60f / songBpm;
-
         //Record the time when the music starts
         dspSongTime = (float)AudioSettings.dspTime;
 

@@ -88,68 +88,68 @@ public static class MusicHelper
     {
         var longScale = new T[scale.Length * 2];
         scale.CopyTo(longScale, 0);
-        Array.Reverse(scale);
-        scale.CopyTo(longScale, scale.Length);
+        Array.Reverse(longScale);
+        scale.CopyTo(longScale, 0);
         return longScale;
     }
 
     #region Scales
 
     // Major scales
-    public static string[] cMajor = { "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5" };
-    public static string[] cSharpMajor = { "C#4", "D#4", "F4", "F#4", "G#4", "A#4", "C5", "C#5" };
-    public static string[] dMajor = { "D4", "E4", "F#4", "G4", "A4", "B4", "C#5", "D5" };
-    public static string[] dSharpMajor = { "D#4", "F4", "G4", "G#4", "A#4", "C5", "D5", "D#5" };
-    public static string[] eMajor = { "E4", "F#4", "G#4", "A4", "B4", "C#5", "D#5", "E5" };
-    public static string[] fMajor = { "F4", "G4", "A4", "A#4", "C5", "D5", "E5", "F5" };
-    public static string[] fSharpMajor = { "F#4", "G#4", "A#4", "B4", "C#5", "D#5", "F5", "F#5" };
-    public static string[] gMajor = { "G4", "A4", "B4", "C5", "D5", "E5", "F#5", "G5" };
-    public static string[] gSharpMajor = { "G#4", "A#4", "C5", "C#5", "D#5", "F5", "G5", "G#5" };
-    public static string[] aMajor = { "A4", "B4", "C#5", "D5", "E5", "F#5", "G#5", "A5" };
-    public static string[] aSharpMajor = { "A#4", "C5", "D5", "D#5", "F5", "G5", "A5", "A#5" };
-    public static string[] bMajor = { "B4", "C#5", "D#5", "E5", "F#5", "G#5", "A#5", "B5" };
+    public readonly static string[] cMajor = { "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5" };
+    public readonly static string[] cSharpMajor = { "C#4", "D#4", "F4", "F#4", "G#4", "A#4", "C5", "C#5" };
+    public readonly static string[] dMajor = { "D4", "E4", "F#4", "G4", "A4", "B4", "C#5", "D5" };
+    public readonly static string[] dSharpMajor = { "D#4", "F4", "G4", "G#4", "A#4", "C5", "D5", "D#5" };
+    public readonly static string[] eMajor = { "E4", "F#4", "G#4", "A4", "B4", "C#5", "D#5", "E5" };
+    public readonly static string[] fMajor = { "F4", "G4", "A4", "A#4", "C5", "D5", "E5", "F5" };
+    public readonly static string[] fSharpMajor = { "F#4", "G#4", "A#4", "B4", "C#5", "D#5", "F5", "F#5" };
+    public readonly static string[] gMajor = { "G4", "A4", "B4", "C5", "D5", "E5", "F#5", "G5" };
+    public readonly static string[] gSharpMajor = { "G#4", "A#4", "C5", "C#5", "D#5", "F5", "G5", "G#5" };
+    public readonly static string[] aMajor = { "A4", "B4", "C#5", "D5", "E5", "F#5", "G#5", "A5" };
+    public readonly static string[] aSharpMajor = { "A#4", "C5", "D5", "D#5", "F5", "G5", "A5", "A#5" };
+    public readonly static string[] bMajor = { "B4", "C#5", "D#5", "E5", "F#5", "G#5", "A#5", "B5" };
 
     // Minor scales
-    public static string[] cMinor = { "C4", "D4", "D#4", "F4", "G4", "G#4", "A#4", "C5" };
-    public static string[] cSharpMinor = { "C#4", "D#4", "E4", "F#4", "G#4", "A4", "B4", "C#5" };
-    public static string[] dMinor = { "D4", "E4", "F4", "G4", "A4", "A#4", "C5", "D5" };
-    public static string[] dSharpMinor = { "D#4", "F4", "F#4", "G#4", "A#4", "B4", "C#5", "D#5" };
-    public static string[] eMinor = { "E4", "F#4", "G4", "A4", "B4", "C5", "D5", "E5" };
-    public static string[] fMinor = { "F4", "G4", "G#4", "A#4", "C5", "C#5", "D#5", "F5" };
-    public static string[] fSharpMinor = { "F#4", "G#4", "A4", "B4", "C#5", "D5", "E5", "F#5" };
-    public static string[] gMinor = { "G4", "A4", "A#4", "C5", "D5", "D#5", "F5", "G5" };
-    public static string[] gSharpMinor = { "G#4", "A#4", "B4", "C#5", "D#5", "E5", "F#5", "G#5" };
-    public static string[] aMinor = { "A4", "B4", "C5", "D5", "E5", "F5", "G5", "A5" };
-    public static string[] aSharpMinor = { "A#4", "C5", "C#5", "D#5", "F5", "F#5", "G#5", "A#5" };
-    public static string[] bMinor = { "B4", "C#5", "D5", "E5", "F#5", "G5", "A5", "B5" };
+    public readonly static string[] cMinor = { "C4", "D4", "D#4", "F4", "G4", "G#4", "A#4", "C5" };
+    public readonly static string[] cSharpMinor = { "C#4", "D#4", "E4", "F#4", "G#4", "A4", "B4", "C#5" };
+    public readonly static string[] dMinor = { "D4", "E4", "F4", "G4", "A4", "A#4", "C5", "D5" };
+    public readonly static string[] dSharpMinor = { "D#4", "F4", "F#4", "G#4", "A#4", "B4", "C#5", "D#5" };
+    public readonly static string[] eMinor = { "E4", "F#4", "G4", "A4", "B4", "C5", "D5", "E5" };
+    public readonly static string[] fMinor = { "F4", "G4", "G#4", "A#4", "C5", "C#5", "D#5", "F5" };
+    public readonly static string[] fSharpMinor = { "F#4", "G#4", "A4", "B4", "C#5", "D5", "E5", "F#5" };
+    public readonly static string[] gMinor = { "G4", "A4", "A#4", "C5", "D5", "D#5", "F5", "G5" };
+    public readonly static string[] gSharpMinor = { "G#4", "A#4", "B4", "C#5", "D#5", "E5", "F#5", "G#5" };
+    public readonly static string[] aMinor = { "A4", "B4", "C5", "D5", "E5", "F5", "G5", "A5" };
+    public readonly static string[] aSharpMinor = { "A#4", "C5", "C#5", "D#5", "F5", "F#5", "G#5", "A#5" };
+    public readonly static string[] bMinor = { "B4", "C#5", "D5", "E5", "F#5", "G5", "A5", "B5" };
 
     // Major Pentatonic scales
-    public static string[] cMajorPentatonic = { "C4", "D4", "E4", "G4", "A4", "C5" };
-    public static string[] cSharpMajorPentatonic = { "C#4", "D#4", "F4", "G#4", "A#4", "C#5" };
-    public static string[] dMajorPentatonic = { "D4", "E4", "F#4", "A4", "B4", "D5" };
-    public static string[] dSharpMajorPentatonic = { "D#4", "F4", "G4", "A#4", "C5", "D#5" };
-    public static string[] eMajorPentatonic = { "E4", "F#4", "G#4", "B4", "C#5", "E5" };
-    public static string[] fMajorPentatonic = { "F4", "G4", "A4", "C5", "D5", "F5" };
-    public static string[] fSharpMajorPentatonic = { "F#4", "G#4", "A#4", "C#5", "D#5", "F#5" };
-    public static string[] gMajorPentatonic = { "G4", "A4", "B4", "D5", "E5", "G5" };
-    public static string[] gSharpMajorPentatonic = { "G#4", "A#4", "C5", "D#5", "F5", "G#5" };
-    public static string[] aMajorPentatonic = { "A4", "B4", "C#5", "E5", "F#5", "A5" };
-    public static string[] aSharpMajorPentatonic = { "A#4", "C5", "D5", "F5", "G5", "A#5" };
-    public static string[] bMajorPentatonic = { "B4", "C#5", "D#5", "F#5", "G#5", "B5" };
+    public readonly static string[] cMajorPentatonic = { "C4", "D4", "E4", "G4", "A4", "C5" };
+    public readonly static string[] cSharpMajorPentatonic = { "C#4", "D#4", "F4", "G#4", "A#4", "C#5" };
+    public readonly static string[] dMajorPentatonic = { "D4", "E4", "F#4", "A4", "B4", "D5" };
+    public readonly static string[] dSharpMajorPentatonic = { "D#4", "F4", "G4", "A#4", "C5", "D#5" };
+    public readonly static string[] eMajorPentatonic = { "E4", "F#4", "G#4", "B4", "C#5", "E5" };
+    public readonly static string[] fMajorPentatonic = { "F4", "G4", "A4", "C5", "D5", "F5" };
+    public readonly static string[] fSharpMajorPentatonic = { "F#4", "G#4", "A#4", "C#5", "D#5", "F#5" };
+    public readonly static string[] gMajorPentatonic = { "G4", "A4", "B4", "D5", "E5", "G5" };
+    public readonly static string[] gSharpMajorPentatonic = { "G#4", "A#4", "C5", "D#5", "F5", "G#5" };
+    public readonly static string[] aMajorPentatonic = { "A4", "B4", "C#5", "E5", "F#5", "A5" };
+    public readonly static string[] aSharpMajorPentatonic = { "A#4", "C5", "D5", "F5", "G5", "A#5" };
+    public readonly static string[] bMajorPentatonic = { "B4", "C#5", "D#5", "F#5", "G#5", "B5" };
 
     // Minor Pentaptonic scales
-    public static string[] cMinorPentatonic = { "C4", "D#4", "F4", "G4", "A#4", "C5" };
-    public static string[] cSharpMinorPentatonic = { "C#4", "E4", "F#4", "G#4", "B4", "C#5" };
-    public static string[] dMinorPentatonic = { "D4", "F4", "G4", "A4", "C5", "D5" };
-    public static string[] dSharpMinorPentatonic = { "D#4", "F#4", "G#4", "A#4", "C#5", "D#5" };
-    public static string[] eMinorPentatonic = { "E4", "G4", "A4", "B4", "D5", "E5" };
-    public static string[] fMinorPentatonic = { "F4", "G#4", "A#4", "C5", "D#5", "F5" };
-    public static string[] fSharpMinorPentatonic = { "F#4", "A4", "B4", "C#5", "E5", "F#5" };
-    public static string[] gMinorPentatonic = { "G4", "A#4", "C5", "D5", "F5", "G5" };
-    public static string[] gSharpMinorPentatonic = { "G#4", "B4", "C#5", "D#5", "F#5", "G#5" };
-    public static string[] aMinorPentatonic = { "A4", "C5", "D5", "E5", "G5", "A5" };
-    public static string[] aSharpMinorPentatonic = { "A#4", "C#5", "D#5", "F5", "G#5", "A#5" };
-    public static string[] bMinorPentatonic = { "B4", "D5", "E5", "F#5", "A5", "B5" };
+    public readonly static string[] cMinorPentatonic = { "C4", "D#4", "F4", "G4", "A#4", "C5" };
+    public readonly static string[] cSharpMinorPentatonic = { "C#4", "E4", "F#4", "G#4", "B4", "C#5" };
+    public readonly static string[] dMinorPentatonic = { "D4", "F4", "G4", "A4", "C5", "D5" };
+    public readonly static string[] dSharpMinorPentatonic = { "D#4", "F#4", "G#4", "A#4", "C#5", "D#5" };
+    public readonly static string[] eMinorPentatonic = { "E4", "G4", "A4", "B4", "D5", "E5" };
+    public readonly static string[] fMinorPentatonic = { "F4", "G#4", "A#4", "C5", "D#5", "F5" };
+    public readonly static string[] fSharpMinorPentatonic = { "F#4", "A4", "B4", "C#5", "E5", "F#5" };
+    public readonly static string[] gMinorPentatonic = { "G4", "A#4", "C5", "D5", "F5", "G5" };
+    public readonly static string[] gSharpMinorPentatonic = { "G#4", "B4", "C#5", "D#5", "F#5", "G#5" };
+    public readonly static string[] aMinorPentatonic = { "A4", "C5", "D5", "E5", "G5", "A5" };
+    public readonly static string[] aSharpMinorPentatonic = { "A#4", "C#5", "D#5", "F5", "G#5", "A#5" };
+    public readonly static string[] bMinorPentatonic = { "B4", "D5", "E5", "F#5", "A5", "B5" };
 
     #endregion
 }

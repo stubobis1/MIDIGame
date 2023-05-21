@@ -8,18 +8,18 @@ namespace LillypadGame
         public GameObject LilyPadPrefab;
         public GameObject Player;
 
-        public Vector3 scrollSpeed;
+        public Vector3 scrollDirection;
         public Vector3 offsetBetweenNotes;
 
         public static LillyPadGameManager Instance;
 
-
-        public List<LillyPadLogic> LilyPads = new List<LillyPadLogic>();
+        public List<LillyPadLogic> LilyPads = new();
         public string[] currentScale;
 
         // Start is called before the first frame update
         void Start()
         {
+            //scrollDirection = Vector3.Normalize(scrollDirection);
             if (Instance != null)
             {
                 Debug.LogError("More than one LillyPadGameManager");
@@ -49,7 +49,8 @@ namespace LillypadGame
                 var lillyPadLogic = obj.GetComponent<LillyPadLogic>();
                 LilyPads.Add(lillyPadLogic);
                 lillyPadLogic.AddNote(noteName);
-                lillyPadLogic.scrollSpeed = this.scrollSpeed;
+                lillyPadLogic.scrollSpeed = (1f / Conductor.Instance.secPerBeat) * offsetBetweenNotes.x * -this.scrollDirection;
+                //lillyPadLogic.scrollSpeed = this.scrollSpeed;
             }
         }
 

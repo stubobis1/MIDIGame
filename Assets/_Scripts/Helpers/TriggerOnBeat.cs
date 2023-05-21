@@ -3,13 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerOnBeat : MonoBehaviour
+public abstract class TriggerOnBeat : MonoBehaviour
 {
 
     protected Dictionary<float, Action<int>> beatActions = new();
 
+    public float Interval = 0;
+
+    public int skipEveryXIntervals = 0;
+    public int BeatOffset = 0;
+    
+    protected virtual void Awake()
+    {
+        this.beatActions.Add(Interval, x => TriggerBeatAction(x));
+    }
+
+    private void TriggerBeatAction(int Beat)
+    {
+        if (skipEveryXIntervals == 0)
+        {
+            BeatAction(Beat);
+            return;
+        }
+
+        if ((Beat + BeatOffset) % skipEveryXIntervals == 0)
+        { 
+            BeatAction(Beat);
+            return;
+        }
+    }
+
+    /// <summary>
+    /// Empty method to override
+    /// </summary>
+    /// <param name="Beat"></param>
+    public virtual void BeatAction(int Beat) { }
+
     // Start is called before the first frame update
-    public virtual void Start()
+    protected virtual void Start()
     {
         subscribeFuncs();
     }
@@ -34,7 +65,4 @@ public class TriggerOnBeat : MonoBehaviour
             Conductor.Instance.RemoveBeatAction(func.Key, func.Value);
         }
     }
-
-
-
 }

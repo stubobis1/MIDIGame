@@ -7,6 +7,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.EAB0C2BA" = "arcade-car-controller-lite"
+	"OpenInspectorPreview.EAB0C2BA" = "0"
+	"currentGroup.EAB0C2BA" = "all"
 }
 providers = {
 	adb = {
@@ -53,6 +56,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"arcade-car-controller-lite"
 ]
 searchItemFavorites = [
 ]

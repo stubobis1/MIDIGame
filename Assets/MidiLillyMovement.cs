@@ -110,10 +110,10 @@ namespace LillypadGame
             }
             isAnimateGrounded = true;
         }
-        Vector3 nextTransform;
+        Transform nextTransform;
         private Vector3 GetJumpPosition()
         {
-            return nextTransform;
+            return nextTransform.position;
             //throw new NotImplementedException();
         }
 
@@ -134,7 +134,7 @@ namespace LillypadGame
                 {
                     Debug.LogWarning($"midi lily Hit correct note: {note.shortDisplayName}");
                 }
-                nextTransform = lillyPad.transform.position;
+                nextTransform = lillyPad.transform;
                 StartJump();
                 currentScaleIndex++;
             }

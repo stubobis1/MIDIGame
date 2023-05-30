@@ -2,6 +2,7 @@ using Minis;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +36,20 @@ public static class MusicHelper
         return noteName.Replace("#", "");
     }
 
+    public static int NoteNameToMidiNumber(string noteName)
+    {
+        // This [^1] is still voodoo to me, it means the last item in the array.
+        // [..^1] means all but the last item in the array.
+        var octive = int.Parse(noteName[^1].ToString());
+        var noteValue = Array.IndexOf(cChromaticScale,noteName[..^1]);
+        return ((octive + 1) * 12) + noteValue;
+    }
+
+    public static string MidiNumberToNoteName(int midiNumber)
+    {
+        return cChromaticScale[midiNumber % 12] + ((midiNumber / 12) - 1).ToString();
+    }
+
     public static T[] CopyAndReverseArray<T>(T[]  scale)
     {
         var longScale = new T[scale.Length * 2];
@@ -45,6 +60,7 @@ public static class MusicHelper
     }
 
     #region Scales and Chords
+    public readonly static string[] cChromaticScale = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
     // Major scales
     public readonly static string[] cMajor = { "C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5" };

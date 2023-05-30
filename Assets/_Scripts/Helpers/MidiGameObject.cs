@@ -21,8 +21,8 @@ public abstract class MidiGameObject : MonoBehaviour
             }
             catch (Exception e)
             {
-                print("?>?");
-                throw;
+                print($"Error on note press {e}");
+                throw e;
             }
             
         };

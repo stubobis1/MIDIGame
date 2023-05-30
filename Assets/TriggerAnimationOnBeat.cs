@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class TriggerAnimationOnBeat : TriggerOnBeat
 {
-    public float Interval = 1f;
+    // public float Interval = 1f;
     public float IntervalsPerLoop = 1f;
     public string BeatAnimationName = "Dizzy";
     public Animator Animator;
@@ -16,13 +16,13 @@ public class TriggerAnimationOnBeat : TriggerOnBeat
     
 
     
-    private void Awake()
+    protected override void Awake()
     {
         if (this.Animator == null)
         {
             this.Animator = this.GetComponent<Animator>();
         }
-        beatActions.Add(Interval, x => triggerOnBeat(x));
+        //beatActions.Add(Interval, x => triggerOnBeat(x));
         foreach (var ani in Animator.runtimeAnimatorController.animationClips) {
             if (ani.name == BeatAnimationName)
             {
@@ -34,7 +34,8 @@ public class TriggerAnimationOnBeat : TriggerOnBeat
     }
 
     public bool startedAni = false;
-    private void triggerOnBeat(int x)
+
+    public override void BeatAction(int x)
     {
         if (startedAni)
         {

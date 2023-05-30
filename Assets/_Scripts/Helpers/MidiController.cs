@@ -87,7 +87,7 @@ sealed class MidiController : MonoBehaviour
                         (note.device as Minis.MidiDevice)?.channel,
                         note.device.description.product
                     ));
-
+                    Debug.Log($"Number of subscribed actions {midiDevice.willNoteOnActionList.Count}, {midiDevice.willNoteOffActionList.Count}");
 
                 };
 
@@ -103,7 +103,7 @@ sealed class MidiController : MonoBehaviour
                 };
             }
             #endregion
-
+             
             midiDevice.onWillNoteOn += doOnActions;
             midiDevice.onWillNoteOff += doOffActions;
             //midiDevice.onWillControlChange += ControlChangeActions;

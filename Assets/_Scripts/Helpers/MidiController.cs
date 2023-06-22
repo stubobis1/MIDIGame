@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 // on MIDI note-on/off events.
 sealed class MidiController : MonoBehaviour
 {
-    public static MidiDevice CurrentMidiDevice;
+    public MidiDevice CurrentMidiDevice;
     public static MidiController Instance;
 
 
@@ -50,11 +50,21 @@ sealed class MidiController : MonoBehaviour
 
     private void OnDestroy()
     {
-        CurrentMidiDevice.onWillNoteOn -= doOnActions;
-        CurrentMidiDevice.onWillNoteOff -= doOffActions;
+        if (CurrentMidiDevice != null)
+        {
+            CurrentMidiDevice.onWillNoteOn -= doOnActions;
+            CurrentMidiDevice.onWillNoteOff -= doOffActions;
+        }
     }
     void Start()
     {
+        var usedMidi = InputSystem.GetDevice<MidiDevice>();
+        if (usedMidi != null)
+        {
+            CurrentMidiDevice = usedMidi;
+            CurrentMidiDevice.onWillNoteOn += doOnActions;
+            CurrentMidiDevice.onWillNoteOff += doOffActions;
+        }
         InputSystem.onDeviceChange += (device, change) =>
         {
             if (change != InputDeviceChange.Added) return;
@@ -66,7 +76,14 @@ sealed class MidiController : MonoBehaviour
             }
             else
             {
+                if (CurrentMidiDevice != null)
+                {
+                    CurrentMidiDevice.onWillNoteOn -= doOnActions;
+                    CurrentMidiDevice.onWillNoteOff -= doOffActions;
+                }
                 CurrentMidiDevice = midiDevice;
+                CurrentMidiDevice.onWillNoteOn += doOnActions;
+                CurrentMidiDevice.onWillNoteOff += doOffActions;
             }
 
             #region debug print actions
@@ -104,10 +121,10 @@ sealed class MidiController : MonoBehaviour
             }
             #endregion
              
-            midiDevice.onWillNoteOn += doOnActions;
-            midiDevice.onWillNoteOff += doOffActions;
+           
             //midiDevice.onWillControlChange += ControlChangeActions;
         };
+      
     }
 
 

@@ -3,12 +3,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
-public static class MusicHelper 
+public static class MusicHelper
 {
-    
+
     public static MidiDevice CurrentMidiDevice;
 
     public static Dictionary<MusicBeatValue, float> ValueBeatLengthInBeats = new Dictionary<MusicBeatValue, float>()
@@ -35,13 +37,19 @@ public static class MusicHelper
     {
         return noteName.Replace("#", "");
     }
+    public static string RemoveOctiveFromNoteName(string noteName)
+    {
+        return Regex.Replace(noteName, @"[\d]", string.Empty);
+    }
 
     public static int NoteNameToMidiNumber(string noteName)
     {
+        if (String.IsNullOrEmpty(noteName)) { return 0; }
+
         // This [^1] is still voodoo to me, it means the last item in the array.
         // [..^1] means all but the last item in the array.
         var octive = int.Parse(noteName[^1].ToString());
-        var noteValue = Array.IndexOf(cChromaticScale,noteName[..^1]);
+        var noteValue = Array.IndexOf(cChromaticScale, noteName[..^1]);
         return ((octive + 1) * 12) + noteValue;
     }
 
@@ -50,7 +58,7 @@ public static class MusicHelper
         return cChromaticScale[midiNumber % 12] + ((midiNumber / 12) - 1).ToString();
     }
 
-    public static T[] CopyAndReverseArray<T>(T[]  scale)
+    public static T[] CopyAndReverseArray<T>(T[] scale)
     {
         var longScale = new T[scale.Length * 2];
         scale.CopyTo(longScale, 0);
@@ -158,7 +166,7 @@ public static class MusicHelper
     public readonly static string[] gSharpDimChord = { "G#", "B", "D" };
     public readonly static string[] aDimChord = { "A", "C", "D#" };
     public readonly static string[] aSharpDimChord = { "A#", "C#", "E" };
-    public readonly static string[] bDimChord = { "B","D","F" };
+    public readonly static string[] bDimChord = { "B", "D", "F" };
 
     // Dominant 7th Chords
     public readonly static string[] cDom7Chord = { "C", "E", "G", "A#" };
@@ -235,15 +243,15 @@ public static class MusicHelper
 }
 
 
-public enum MusicBeatValue 
+public enum MusicBeatValue
 {
-    whole, 
-    dottedHalf, 
-    half, 
-    dottedQuater, 
-    quarter, 
-    dottedEighth, 
-    eighth, 
-    sixteenth, 
+    whole,
+    dottedHalf,
+    half,
+    dottedQuater,
+    quarter,
+    dottedEighth,
+    eighth,
+    sixteenth,
     triplet
 }

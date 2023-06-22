@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Minis;
 using Unity.VisualScripting;
-using static UnityEditor.PlayerSettings;
 
 namespace ScaleGame2d
 {
